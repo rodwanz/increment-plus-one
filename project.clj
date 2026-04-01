@@ -6,6 +6,7 @@
   :dependencies [[org.clojure/clojure "1.12.2"]
                  [ring/ring-core "1.10.0"]
                  [ring/ring-jetty-adapter "1.10.0"]
-                 [compojure "1.7.0"]]
+                 [compojure "1.7.0"]
+                 [ring/ring-json "0.5.1"]]
   :repl-options {:init-ns increment-plus-one.core}
   :main increment-plus-one.core)

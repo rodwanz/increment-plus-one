@@ -1,7 +1,8 @@
 (ns increment-plus-one.core
   (:require [compojure.core :refer [defroutes GET]]
-            [compojure.route :as route]
-            [ring.adapter.jetty :refer [run-jetty]])
+            [ring.adapter.jetty :refer [run-jetty]]
+            [ring.middleware.json :refer [wrap-json-response]]
+            [ring.util.response :refer [response]])
   (:gen-class))
 
 (defn increment [n]
@@ -9,11 +10,12 @@
 
 (defroutes app-routes
            (GET "/inc/:value" [value]
-                (let [number (Integer/parseInt value)]
-                  (str "Result: " (increment number))))
-           (route/not-found "Route not found"))
+           (response {:original-value value
+                      :result (increment (Integer/parseInt value))})))
+
+(def app (wrap-json-response app-routes))
 
 (defn -main [& args]
-  (println "Server running on http://localhost:3000")
-  (run-jetty app-routes {:port 3000 :join? false }))
+  (println "API running on http://localhost:3000")
+  (run-jetty app {:port 3000 :join? false }))
 
