@@ -7,6 +7,7 @@
                  [ring/ring-core "1.10.0"]
                  [ring/ring-jetty-adapter "1.10.0"]
                  [compojure "1.7.0"]
-                 [ring/ring-json "0.5.1"]]
+                 [ring/ring-json "0.5.1"]
+                 [ring-cors "0.1.13"]]
   :repl-options {:init-ns increment-plus-one.core}
   :main increment-plus-one.core)
