@@ -10,12 +10,17 @@
     0))
 
 (defn increment-counter [conn]
-  (let [curr (get-counter conn)
-        next (inc curr)]
-    @(d/transact conn
-                 [[:db/add
-                   [:counter/id "global-counter"]
-                   :counter/value
-                   next]])
-    next))
+    (let [curr (get-counter conn)
+         next (inc curr)]
+       (try
+         @(d/transact conn
+                     [[:db.fn/cas
+                       [:counter/id "global-counter"]
+                       :counter/value
+                       curr
+                       next]])
+         next
+         (catch Exception e
+           (println "CAS failed:" (.getMessage e))
+           curr))))
 

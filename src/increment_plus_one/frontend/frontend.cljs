@@ -13,7 +13,7 @@
       (println "Value:" @number)
 
       (let [n (or @number 0)]
-           (go (let [response (<! (http/get (str "http://localhost:3000/inc/" n)
+           (go (let [response (<! (http/post (str "http://localhost:3000/api/increment")
                                             {:with-credentials? false}))]
                     (println response)
                     (when (= 200 (:status response))
@@ -21,11 +21,11 @@
 
 (defn home-page []
       [:div {:style {:text-align "center" :margin-top "50px"}}
-       [:h1 "Counter"]
+       [:h1 "Increment"]
        [:p "Current value: " [:strong @number]]
        [:button {:on-click call-api-increment
                  :style {:padding "10px 20px" :cursor "pointer"}}
-        "Increment on Server"]])
+        "Can increase"]])
 
 (defn mount-root []
       (when-not @root

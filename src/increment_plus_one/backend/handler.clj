@@ -8,8 +8,8 @@
 
 (def app
   (-> (app-routes conn)
-      (wrap-json-body {:keywords? :true})
+      (wrap-json-body {:keywords? true})
       (wrap-json-response)
-      (wrap-cors :access-control-allow-origin [#"http://localhost:3001*"]
+      (wrap-cors :access-control-allow-origin [#"http://localhost:3001$"]
                  :access-control-allow-methods [:get :post])))
 

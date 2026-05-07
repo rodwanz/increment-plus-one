@@ -33,8 +33,10 @@
                      :counter/value 0}]))))
 
 (defn init-db []
+  (println "Initializing DB...")
   (d/create-database db-uri)
   (let [conn (d/connect db-uri)]
+    (println "Ensuring that there are...")
     (ensure-schema conn)
     (ensure-counter conn)
     conn))
