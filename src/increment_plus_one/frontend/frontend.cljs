@@ -1,4 +1,4 @@
-(ns increment-plus-one.frontend
+(ns increment-plus-one.frontend.frontend
   (:require [reagent.core  :as r]
             [reagent.dom.client :as rdom]
             [cljs.core.async :refer [<!]]
@@ -6,7 +6,7 @@
   (:require-macros [cljs.core.async.macros :refer [go]]))
 
 (defonce number (r/atom 0))
-(defonce root (atom nill))
+(defonce root (atom nil))
 
 (defn call-api-increment []
       (println "Clicked")
